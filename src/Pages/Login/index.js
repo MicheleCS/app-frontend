@@ -10,6 +10,7 @@ const userService = new UserService()
 const Login = () => {
   const[loading, setLoading] = useState(false)
   const [form, setForm] = useState([])
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,6 +20,7 @@ const Login = () => {
       console.log('response do Login', response )
       if(response === true) {
         alert('usuário Logado')
+        navigate('/home')
       }
       alert('Login')
       setLoading(false)
