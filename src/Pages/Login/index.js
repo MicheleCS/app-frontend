@@ -3,15 +3,25 @@ import { Container, Form } from "./styles";
 import Input from "../../Components/Input/index";
 import Btn from "../../Components/Btn/index";
 import { validatorEmail, validatorPassword } from "../../Utils/validator";
+import UserService from "../../Services/UserService";
+
+const userService = new UserService()
 
 const Login = () => {
   const[loading, setLoading] = useState(false)
   const [form, setForm] = useState([])
+  const navigate = useNavigate()
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       setLoading(true)
+      const response = await userService.login(form)
+      console.log('response do Login', response )
+      if(response === true) {
+        alert('usuário Logado')
+        navigate('/home')
+      }
       alert('Login')
       setLoading(false)
     } catch (error) {
