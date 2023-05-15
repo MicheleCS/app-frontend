@@ -3,6 +3,9 @@ import { Container, Form } from "./styles";
 import Input from "../../Components/Input/index";
 import Btn from "../../Components/Btn/index";
 import { validatorEmail, validatorPassword } from "../../Utils/validator";
+import UserService from "../../Services/UserService";
+
+const userService = new UserService()
 
 const Login = () => {
   const[loading, setLoading] = useState(false)
@@ -12,6 +15,11 @@ const Login = () => {
     event.preventDefault();
     try {
       setLoading(true)
+      const response = await userService.login(form)
+      console.log('response do Login', response )
+      if(response === true) {
+        alert('usuário Logado')
+      }
       alert('Login')
       setLoading(false)
     } catch (error) {
